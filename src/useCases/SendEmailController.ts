@@ -7,8 +7,8 @@ class SendEmailController {
     ) {}
 
     handle (request: Request, response: Response): Response {
-        const { email, content } = request.body;
-        this.sendEmailUseCase.execute({ email, content });
+        const { email, content, name } = request.body;
+        this.sendEmailUseCase.execute({ email, content, name });
         return response.status(201).json({ sucess: "E-mail enviado com sucesso" });
     }  
 }

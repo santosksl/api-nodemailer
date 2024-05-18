@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 
 interface IRequest {
+    name: string,
     email: string,
     content: string
 }
@@ -8,7 +9,7 @@ interface IRequest {
 class SendEmailUseCase {
     constructor() {}
 
-    execute({ email, content }: IRequest) {
+    execute({ email, content, name }: IRequest) {
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -24,7 +25,7 @@ class SendEmailUseCase {
             from: email,
             to: process.env.EMAIL_USER,
             subject: "NodeJS - NodeMailer (My Portfolio)",
-            text: content,
+            text: `Nome: ${name}` + '\n' + `Mensagem: ${content}`,
         }
 
         transporter.sendMail(mailOptions, (err) => {

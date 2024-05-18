@@ -1,7 +1,8 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { Server } from "http"
 import router from "./routes";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 export class SetupApplication {
     private server?: Server;
@@ -18,9 +19,15 @@ export class SetupApplication {
     }
 
     private setupExpress() {
+        const corsOptions = {
+            origin: '*',
+            optionsSuccessStatus: 200,
+        }
+
         this.app.use(express.json());
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }))
+        this.app.use(cors(corsOptions));
     }
 
     public startApplication() {
