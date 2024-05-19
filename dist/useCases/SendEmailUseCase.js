@@ -22,7 +22,7 @@ class SendEmailUseCase {
             from: email,
             to: process.env.EMAIL_USER,
             subject: "NodeJS - NodeMailer (My Portfolio)",
-            text: `Nome: ${name}` + '\n' + `Mensagem: ${content}`,
+            text: `Email: ${email}` + '\n' + `Nome: ${name}` + '\n' + `Mensagem: ${content}`,
         };
         transporter.sendMail(mailOptions, (err) => {
             if (err) {
@@ -31,6 +31,7 @@ class SendEmailUseCase {
             }
             else {
                 console.log("E-mail enviado com sucesso!");
+                console.log(mailOptions.from);
             }
         });
     }
